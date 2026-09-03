@@ -93,12 +93,12 @@ def test_abstains_out_of_scope():
 def test_fingerprint_changes_when_data_changes(tmp_path):
     fp1 = dataset_fingerprint()
     p = config.DOCS_DIR / "kpi_definitions.md"
-    original = p.read_text()
+    original = p.read_bytes()          # bytes, not text: Windows would rewrite \n as \r\n and change the hash
     try:
-        p.write_text(original + "\nTemporary edit.\n")
+        p.write_bytes(original + b"\nTemporary edit.\n")
         assert dataset_fingerprint() != fp1
     finally:
-        p.write_text(original)
+        p.write_bytes(original)
     assert dataset_fingerprint() == fp1
 
 

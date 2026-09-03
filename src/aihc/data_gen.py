@@ -135,10 +135,11 @@ def write_all() -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
     locations, funnel = generate()
-    locations.to_csv(DATA_DIR / "locations.csv", index=False)
-    funnel.to_csv(DATA_DIR / "funnel_weekly.csv", index=False)
+    # Explicit "\n" everywhere so the dataset fingerprint is identical on Windows, macOS and Linux.
+    locations.to_csv(DATA_DIR / "locations.csv", index=False, lineterminator="\n")
+    funnel.to_csv(DATA_DIR / "funnel_weekly.csv", index=False, lineterminator="\n")
     for name, text in DOCS.items():
-        (DOCS_DIR / name).write_text(text, encoding="utf-8")
+        (DOCS_DIR / name).write_text(text, encoding="utf-8", newline="\n")
     print(f"wrote {len(funnel):,} funnel rows, {len(locations)} locations, {len(DOCS)} docs to {DATA_DIR}")
 
 
