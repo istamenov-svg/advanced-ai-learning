@@ -1,0 +1,35 @@
+name: weekly insights agent
+
+on:
+  schedule:
+    - cron: "0 11 * * 1"      # Mondays 11:00 UTC = 07:00 America/New_York (EDT); 06:00 in winter
+  workflow_dispatch: {}
+
+jobs:
+  evals-then-run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: data (replace with a real export step: S3 pull, CRM API, etc.)
+        run: python -m aihc.data_gen
+      - name: eval gate (stub mode; runs the numeric + citation checks without spending tokens)
+        env:
+          AIHC_STUB: "1"
+        run: python -m aihc.evals.run_evals
+      - name: run agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python -m aihc.agent.insights_agent --weeks 4
+      - name: commit report
+        run: |
+          git config user.name "aihc-agent"
+          git config user.email "agent@users.noreply.github.com"
+          git add -f reports/*.md state.json runs.jsonl
+          git commit -m "weekly insights $(date -u +%F)" || echo "nothing to commit"
+          git push

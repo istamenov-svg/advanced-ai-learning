@@ -1,0 +1,20 @@
+{"id": "m01", "type": "metrics", "question": "What was cost per show in Q2 2026 for the Tampa region?", "expect_value": "$181.83"}
+{"id": "m02", "type": "metrics", "question": "What was the paid social cost per lead in South Florida in Q2 2026?", "expect_value": "$69.45"}
+{"id": "m03", "type": "metrics", "question": "What was the paid social cost per lead in South Florida in Q1 2026?", "expect_value": "$54.18"}
+{"id": "m04", "type": "metrics", "question": "How many leads did Atlanta generate in Q2 2026?", "expect_value": "2,808"}
+{"id": "m05", "type": "metrics", "question": "What was ROI by region in Q2 2026?", "expect_values": {"Atlanta": "3.51x", "Orlando": "3.19x", "South Florida": "3.25x", "Tampa": "3.27x"}}
+{"id": "m06", "type": "metrics", "question": "What was the referral show rate in Q1 2026?", "expect_value": "85.6%"}
+{"id": "m07", "type": "metrics", "question": "What was total spend in Q1 2026?", "expect_value": "$822,916.23"}
+{"id": "m08", "type": "metrics", "question": "What was production per show for Google Search in Q2 2026?", "expect_value": "$574.12"}
+{"id": "m09", "type": "metrics", "question": "What was the treatment acceptance rate in Orlando in Q2 2026?", "expect_value": "54.3%"}
+{"id": "m10", "type": "metrics", "question": "What was cost per show for L07 in Q2 2026?", "expect_value": "$177.97"}
+{"id": "d01", "type": "docs", "question": "What paid social CPL level for four consecutive weeks triggers a budget hold?", "expect_source": "paid_social_policy", "must_contain": ["$90"]}
+{"id": "d02", "type": "docs", "question": "How is cost per show defined?", "expect_source": "kpi_definitions", "must_contain": ["spend / shows"]}
+{"id": "d03", "type": "docs", "question": "What is the speed to lead standard during business hours?", "expect_source": "lead_followup_playbook", "must_contain": ["5 minutes"]}
+{"id": "d04", "type": "docs", "question": "Can we build retargeting audiences from lead lists that include treatment interest?", "expect_source": "paid_social_policy", "must_contain": ["not"]}
+{"id": "d05", "type": "docs", "question": "Is condition-specific targeting allowed for oncology campaigns?", "expect_source": "oncology_marketing_compliance_note", "must_contain": ["prohibited"]}
+{"id": "d06", "type": "docs", "question": "What approval is needed to move more than 20% of a region's monthly budget between channels?", "expect_source": "paid_social_policy", "must_contain": ["regional marketing manager"]}
+{"id": "d07", "type": "docs", "question": "What is the board's working hypothesis for the South Florida paid social decline?", "expect_source": "q2_2026_board_memo", "must_contain": ["creative fatigue"]}
+{"id": "d08", "type": "docs", "question": "How are Atlanta locations being evaluated this year?", "expect_source": "q2_2026_board_memo", "must_contain": ["lead volume"]}
+{"id": "d09", "type": "docs", "question": "Which definition of ROI does board reporting use?", "expect_source": "kpi_definitions", "must_contain": ["production"]}
+{"id": "d10", "type": "docs", "question": "What is the company's policy on employee parking reimbursement?", "expect_abstain": true}

@@ -1,0 +1,22 @@
+---
+description: Working rules for the advanced-ai-learning repo
+alwaysApply: true
+---
+
+# Purpose
+This is a learning project. The owner is building understanding, not shipping fast. When asked to change code, explain what the change does and why before making it. Prefer small diffs.
+
+# Non-negotiable design rules
+- Numbers never come from the model. Any metric shown to a user is computed in `src/aihc/metrics.py` and passed to the model as a fact block. Do not add code that has the model calculate, round, or estimate figures.
+- Every model call goes through `src/aihc/llm.py`. Do not instantiate API clients elsewhere (the module exercises under `modules/` are the exception and say so).
+- Answers about documents must cite chunk ids in `[source#hash]` form, and `answer.py` verifies them. Keep that check.
+- If a prompt template changes, bump `PROMPT_VERSION` in `src/aihc/config.py`.
+- Do not edit `src/aihc/evals/golden.jsonl` expected values to make a failing eval pass. Fix the code or ask.
+
+# Workflow
+- Run `pytest` before proposing a commit. Run `python -m aihc.evals.run_evals` after any change to chunking, retrieval, prompts, or the model ID.
+- Keep functions pure and deterministic where possible; sort before iterating over dict/set results.
+- Python 3.11, type hints, no new dependencies without stating why.
+
+# Domain
+Healthcare marketing for multi-location dental groups. Terms: CPL (cost per lead), CPS (cost per show), show rate, treatment acceptance, production. Lead exports may contain identifiable patient data; never commit real exports and never log row-level lead data.
