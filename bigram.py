@@ -5,7 +5,7 @@ from torch.nn import functional as F
 #hyperparameters
 batch_size = 32 # how many independent sequences will we process in parallel?
 block_size = 8 # what is the maximum context length for predictions?
-max+iters = 3000
+max_iters = 3000
 eval_interval = 300
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 eval_iters = 200
@@ -23,8 +23,8 @@ vocab_size = len(chars)
 # create a mapping from characters to integers
 stoi = { ch:i for i,ch in enumerate(chars) }
 itos = { i:ch for i,ch in enumerate(chars) }
-encode = lambda s: [stoi[c] fpr c in s] # encoder: take a string, output a list of integers
-decode = lambda l: ''.join([itos[i] fr i in l]) # decoder: take a list of integers, output a string
+encode = lambda s: [stoi[c] for c in s] # encoder: take a string, output a list of integers
+decode = lambda l: ''.join([itos[i] for i in l]) # decoder: take a list of integers, output a string
 
 # Train and test splits
 data = torch.tensor(encode(text), dtype=torch.long)
